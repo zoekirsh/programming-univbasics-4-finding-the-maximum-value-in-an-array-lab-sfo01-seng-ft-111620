@@ -87,7 +87,13 @@ to use collection data to answer questions and they're commonly used in
 interviews.  From there, it is only a few small conceptual steps to highly
 complex algorithms.
 
+## Video Walkthrough
+
+Try to solve this by yourself and give it your best, but if you get stuck 
+checkout this video walkthrough:
+
+<iframe width="640" height="480" src="https://www.youtube.com/watch?v=eEIP3wliWcY" frameborder="0" allowfullscreen></iframe>
+
 ## Resources
 
 - [Arrays](https://ruby-doc.org/core-2.5.3/Array.html)
-- [Array Concept Review Lab Hot Potato](https://www.youtube.com/watch?v=eEIP3wliWcY)
