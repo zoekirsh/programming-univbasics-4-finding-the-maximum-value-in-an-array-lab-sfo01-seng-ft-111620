@@ -92,6 +92,8 @@ complex algorithms.
 Try to solve this by yourself and give it your best, but if you get stuck 
 checkout this video walkthrough:
 
+[Video Walkthrough](https://www.youtube.com/watch?v=eEIP3wliWcY)
+
 <iframe width="640" height="480" src="https://www.youtube.com/embed/eEIP3wliWcY" frameborder="0" allowfullscreen></iframe>
 
 ## Resources
