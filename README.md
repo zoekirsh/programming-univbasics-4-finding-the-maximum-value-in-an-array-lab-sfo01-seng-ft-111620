@@ -90,3 +90,4 @@ complex algorithms.
 ## Resources
 
 - [Arrays](https://ruby-doc.org/core-2.5.3/Array.html)
+- [Array Concept Review Lab Hot Potato](https://www.youtube.com/watch?v=eEIP3wliWcY)
