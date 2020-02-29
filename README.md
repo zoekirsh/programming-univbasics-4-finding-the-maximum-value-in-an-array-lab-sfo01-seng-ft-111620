@@ -7,94 +7,132 @@
 
 ## Introduction
 
-We've stepped away from the idea of programming as conversation in these last
-few lessons. But now that you understand what an Array is and how it mirrors
-real life, you might realize that you've been working with Arrays all the time!
+In the previous lab, we looped through arrays to find elements. In discussing
+how to solve the lab, multiple solutions were discussed - one solution looped
+through the entire array and the other stopped as soon as a matching element was
+found.
 
-* Do any of the children have a runny nose?
-* Do all of the children have a runny nose?
-* "Is there a doctor in the house?"
-* Do all of the dogs have their rabies vaccination?
-* Who is the fastest runner?
-* What is lowest temperature Maui will see during my vacation?
+In this lab, we are going to look at a slightly more complex task. We still want
+to find a specific array element, but this time, we won't have a provided value
+to compare with. Instead, we will need to find an element based on its value
+_relative to the other elements in the array._
 
-Given an Array with the appropriate data, you now have the ability to loop
-through it and return the critical bit of information.
+Your task is to write a method that finds the element in an array with the
+highest value. This is often referred to as finding an array's **maximum**
+value.
 
-We're going to practice working with arrays and loops in a bit
-more depth. We will be using them to implement three common patterns:
-
-- Looping through an array to find the position of a value
-- Finding a maximum value in an array
-- Finding a minimum value in an array
+Because you need to find an array element relative to other elements, we **must
+loop over every element of the array**. We can' be certain that one element is
+the maximum if we haven't checked every other element!
 
 ## Instructions
 
 For this lab's tests, assume all arrays are sets of **positive integers**. The
-methods and parameter names are provided for you in `lib/array_methods.rb`.
+`find_max_value` method and parameter name are provided for you in
+`lib/finding_the_maximum_value.rb`. 
 
-> *ASIDE*: For every test in the "Array" of tests, make sure you can pass it so
-> you can move to the next lesson ;)
+The `find_max_value` takes in an array of integers and should return whichever
+_integer_ in the array has the highest value. So, for instance, if we ran the
+following:
 
-Write the implementation for each of these methods that solves the tests.
-
-### Finding Where an Element is Located on an Array
-
-The first method, `find_element_index(array, value_to_find)`, takes in two
-parameters, an array of integers and a value to find. This method should
-return the _index_ of the value that was passed in. If the value is not found,
-this method should return `nil`.
-
-To implement this method, you will need loop over the provided array and compare
-each value in the array to the value provided. Remember though, that this is
-_not_ the value that needs to be returned
-
-### Finding a Maximum Value
-
-The second method, `find_max_value(array)`, takes in an array of integers. This
-methods should return whichever integer in the array has the highest value. So,
-for instance, if we ran the following:
-
-```ruby
-find_max_value([1,2,1,3,4,3,5,4,3,2,1])
+```sh
+2.6.1 :005 > find_max_value([1,2,1,3,4,3,5,4,3,2,1])
+ => 5
 ```
 
 We should expect to receive `5` in return. Remember when writing your
-implementation, you will need to check _every_ number in a given array
+implementation, you will need to check _every_ number in a given array.
 
-### Finding a Minimum Value
+Remember again to check every element in the provided array! Try your best to
+solve this lab. A walkthrough is provided below to verify your understanding and
+help you if you get stuck.
 
-Similar to the previous, `find_min_value(array)`, takes in an array of integers.
-This method should return whichever integer in the array has the lowest value.
+...
 
-```ruby
-find_min_value([10,5,3,7,19,1,3,10])
+...
+
+...
+
+## Solving this Lab
+
+Since we're comparing array elements, to start, we know we will need a loop to
+access every element.
+
+```rb
+def find_max_value(array)
+  count = 0
+  while count < array.length do
+
+    count += 1
+  end
+end
 ```
 
-We should expect to receive `1` in return.
+The instructions state that we will always be working with arrays of positive
+integers, but how can we compare them to one another?
+
+One way is to use a variable (let's call it `max_value`) - assign a variable a
+value that is _lower_ than any possible value in the array. When looping over
+array elements, if an element's value is greater than the `max_value` variable,
+`max_value` gets reassigned to equal the element's value. `max_value` is then
+returned at the end:
+
+```rb
+def find_max_value(array)
+  count = 0
+  max_value = -1
+  while count < array.length do
+    if max_value < array[count]
+      max_value = array[count]
+    end
+    count += 1
+  end
+  max_value
+end
+```
+
+Let's think about how this works. Consider the following array:
+
+```rb
+[2, 3, 3, 4, 3, 6, 1, 3]
+```
+
+If this array was passed into `find_max_value`, the following steps would occur:
+
+- `count` gets assigned to `0`
+- `max_value` gets assigned to `-1`
+- In the `while` loop initiates and `count < array.length` evaluates to true
+  (`0`is less than `8`), so the implementation inside the loop executes
+  - `max_value` is less than `array[count]` (`-1` is less than `2`).
+  - `max_value` is reassigned to `2`.
+  - `count` is assigned to `1`
+- `count < array.length` again evaluates to true (`1` is less than `8`)
+  - `max_value` is less than `array[count]` (`2` is less than `3`).
+  - `max_value` is assigned to `3`.
+  - `count` is assigned to `2`
+- `count < array.length` again evaluates to true (`2` is less than `8`)
+  - `max_value` is NOT less than `array[count]` (`3` is equal `3`).
+  - `max_value` is not reassigned, staying at `3`
+  - `count` is assigned to `3`
+- `count < array.length` again evaluates to true (`3` is less than `8`)
+  - `max_value` is less than `array[count]` (`3` is less than `4`).
+  - `max_value` is reassigned to `4`
+  - `count` is assigned to `4`
+
+Eventually, `max_value` gets reassigned to `6`, where it will stay until the
+loops finish. This is the maximum value in the array.
 
 ## Conclusion
 
-Learning to master using a collection to answer a question is usually
-accomplished by looping through a collection data type (either an Array or
-Hash). You might notice some similar coding between these various solutions,
-that suggests that there might be an awesome way to DRY out this code (and
-you'll see it very soon!).
+Finding the maximum value in a collection is extremely common in all sorts of
+applications.
 
-While coding these implementations might feel repetitive after a while, they
-are worthwhile to practice.  They ensure that you can reason clearly about how
-to use collection data to answer questions and they're commonly used in
-interviews.  From there, it is only a few small conceptual steps to highly
-complex algorithms.
+- Given an array of hourly temperatures, what is today's high?
+- Who is the tallest person in a line?
+- What was the high point of the stock market this week?
 
-## Video Walkthrough
-
-Try to solve this by yourself and give it your best, but if you get stuck 
-checkout this video walkthrough:
-
-[Video Walkthrough](https://www.youtube.com/watch?v=eEIP3wliWcY)
-
-<iframe width="640" height="480" src="https://www.youtube.com/embed/eEIP3wliWcY" frameborder="0" allowfullscreen></iframe>
+Even if we don't have a specific value we're looking for, we now have a way to
+work through a collection of data and pull out useful values.
 
 ## Resources
 
